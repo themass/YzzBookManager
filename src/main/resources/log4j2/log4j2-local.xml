@@ -1,30 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_EXCEPTION_CONVERSION_WORD" value="%xwEx"/>
-    <property name="LOG_LEVEL_PATTERN" value="%5p"/>
-    <property name="LOG_DATEFORMAT_PATTERN" value="yyyy-MM-dd HH:mm:ss.SSS"/>
-    <property name="baseLogDir" value="./logs"/>
-    <property name="consolePattern" value="%clr{%d{${LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${LOG_LEVEL_PATTERN}}
-        [TraceId: %X{X-B3-TraceId}, SpanId: %X{X-B3-SpanId}] %clr{---}{faint} %clr{[%10.10t]}{faint}
-        %clr{%-30.30c{1.}}{cyan} %clr{:}{faint} [%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD}"/>
-    <property name="logPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %pid [%thread] [TraceId: %X{X-B3-TraceId},
-        SpanId: %X{X-B3-SpanId}] %logger{36} [%L] -- %msg%n"/>
-    <property name="simpleLogPattern" value="%msg%n"/>
-
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- 定义Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${consolePattern}</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-        <filter class="ch.qos.logback.core.filter.ThresholdFilter">
-            <level>DEBUG</level>
-        </filter>
     </appender>
 
-    <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="console"/>
-    </appender>
-
+    <!-- 定义根Logger -->
     <root level="INFO">
-        <appender-ref ref="async"/>
+        <appender-ref ref="CONSOLE" />
     </root>
 </configuration>
